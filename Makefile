@@ -1,19 +1,7 @@
-CC=g++
-CFLAGS=-c -Wall
+obj-m += main.o
 
-all: calculator
-
-calculator: main.o libcalculator.a
-	$(CC) main.o -L. -lcalculator -o calculator
-
-libcalculator.a: calculator.o
-	ar rcs libcalculator.a calculator.o
-
-calculator.o: calculator.cpp
-	$(CC) $(CFLAGS) calculator.cpp
-
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp
+all:
+	$(MAKE) -C $(KDIR) M=$(PWD) modules
 
 clean:
-	rm -f *.o *.a calculator
+	$(MAKE) -C $(KDIR) M=$(PWD) clean
